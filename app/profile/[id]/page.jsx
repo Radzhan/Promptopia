@@ -1,11 +1,12 @@
 "use client";
 
+import { Suspense } from 'react';
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
 import Profile from "@components/Profile";
 
-const UserProfile = ({ params }) => {
+const UserProfileComponent = ({ params }) => {
   const searchParams = useSearchParams();
   const userName = searchParams.get("name");
 
@@ -30,5 +31,14 @@ const UserProfile = ({ params }) => {
     />
   );
 };
+
+
+function UserProfile() {
+  return (
+    <Suspense fallback={<div>Загрузка...</div>}>
+      <UserProfileComponent />
+    </Suspense>
+  );
+}
 
 export default UserProfile;
